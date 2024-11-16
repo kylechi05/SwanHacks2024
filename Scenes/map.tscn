@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
+
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
@@ -16,6 +17,7 @@ tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_ln2vo")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_nn2d5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(640, 360)
