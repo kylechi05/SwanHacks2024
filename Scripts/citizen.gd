@@ -1,11 +1,19 @@
 class_name Citizen
 
 var name: String
-var gender: String
+
+# range = 0.0 - 1.0
+# avg. = 0.3
+# max_start = .7
+# min_start = .05
 var immunity: float
+
 var isVaccinated: bool
 var isMasked: bool
+
+# default = 0.5
 var isEducated: bool
+
 var job: Vector2
 var residence: Vector2
 
@@ -30,7 +38,7 @@ func getEducated():
 func setEducated(edu: bool):
 	isEducated = edu
 	
-func getJub():
+func getJob():
 	return job
 
 func setJob(loc: Vector2):
