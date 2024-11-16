@@ -1,6 +1,7 @@
 class_name Citizen
 
 var name: String
+var location: Vector2i
 
 # range = 0.0 - 1.0
 # avg. = 0.3
@@ -15,10 +16,10 @@ var isInfected: bool
 var isEducated: bool
 var isDead: bool
 
-var job: Vector2i
-var residence: Vector2i
+var work: Vector2i
+var home: Vector2i
 
-func _init(name: String, immunity: float, sick_length: float, edu_prob: float):
+func _init(name: String, immunity: float, sick_length: float, edu_prob: float, home: Vector2i, work: Vector2i):
 	self.name = name
 	self.immunity = immunity
 	self.sick_length = sick_length
@@ -27,9 +28,18 @@ func _init(name: String, immunity: float, sick_length: float, edu_prob: float):
 	self.isInfected = false
 	self.isEducated = randf() < edu_prob
 	self.isDead = false
+	self.home = home
+	self.work = work
+	self.location = home
 
 func getName() -> String:
 	return self.name
+
+func getLocation() -> Vector2i:
+	return self.location
+
+func setLocation(location: Vector2i) -> void:
+	self.location = location
 
 func getImmunity() -> float:
 	return self.immunity
@@ -61,14 +71,14 @@ func getDead() -> bool:
 func setDead(dead) -> void:
 	self.isDead = dead
 	
-func getJob() -> Vector2i:
-	return self.job
+func getWork() -> Vector2i:
+	return self.work
 
-func setJob(job: Vector2i) -> void:
-	self.job = job
+func setWork(work: Vector2i) -> void:
+	self.work = work
 	
-func getResidence() -> Vector2i:
-	return self.residence
+func getHome() -> Vector2i:
+	return self.home
 
-func setResidence(residence: Vector2i) -> void:
-	self.residence = residence
+func setHome(home: Vector2i) -> void:
+	self.home = home

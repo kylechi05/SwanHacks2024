@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=6 format=3 uid="uid://cyofhlwqbf7xl"]
 
+[ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
 
@@ -16,6 +17,7 @@ tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_ln2vo")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_1hx2l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(640, 360)
@@ -24,3 +26,5 @@ offset = Vector2(640, 360)
 tile_set = SubResource("TileSet_bud3e")
 format = 2
 script = ExtResource("2_m6xmo")
+
+[connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]

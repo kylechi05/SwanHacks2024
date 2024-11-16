@@ -1,5 +1,6 @@
 extends TileMap
 
+signal finished_render
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var temp_file = FileAccess.open("res://GameData/map.txt", FileAccess.READ)
@@ -48,6 +49,7 @@ func read_map():
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
 			id += 1
+	finished_render.emit()
 
 func init_astar(x, y):
 		if x > 0:
