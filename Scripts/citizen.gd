@@ -14,38 +14,40 @@ var isMasked: bool
 # default = 0.5
 var isEducated: bool
 
-var job: Vector2
-var residence: Vector2
+var job: Vector2i
+var residence: Vector2i
 
-func _init():
-	pass
+func _init(name: String, immunity: float, edu_prob: float):
+	self.name = name
+	self.immunity = immunity
+	self.isEducated = randf() < edu_prob
 
 func getVaccinated():
-	return isVaccinated
+	return self.isVaccinated
 	
-func setVaccinated(vacc: bool):
-	isVaccinated = vacc
+func setVaccinated(vaccinated: bool):
+	self.isVaccinated = vaccinated
 	
 func getMasked():
-	return isMasked
+	return self.isMasked
 	
-func setMasked(mask: bool):
-	isMasked = mask
+func setMasked(masked: bool):
+	self.isMasked = masked
 	
 func getEducated():
-	return isEducated
+	return self.isEducated
 
-func setEducated(edu: bool):
-	isEducated = edu
+func setEducated(educated: bool):
+	self.isEducated = educated
 	
 func getJob():
-	return job
+	return self.job
 
-func setJob(loc: Vector2):
-	job = loc
+func setJob(job: Vector2i):
+	self.job = job
 	
 func getResidence():
-	return residence
+	return self.residence
 
-func setResidence(res: Vector2):
-	residence = res
+func setResidence(residence: Vector2i):
+	self.residence = residence
