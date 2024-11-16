@@ -3,12 +3,19 @@ extends Node
 var num_people = 40
 var edu_prob = 0.3
 var imm_prob_window = {"min": 0.05, "max": 0.70}
+var MAP_SIZE = Vector2(44,30)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+var places = {}
+var tile_array_0 = []
+var num_people = 40
+var collision_data = []
+var citizen_astar = AStar2D.new()
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+ pass
