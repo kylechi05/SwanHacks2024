@@ -22,32 +22,32 @@ func _init(name: String, immunity: float, edu_prob: float):
 	self.immunity = immunity
 	self.isEducated = randf() < edu_prob
 
-func getVaccinated():
+func getVaccinated() -> bool:
 	return self.isVaccinated
 	
-func setVaccinated(vaccinated: bool):
+func setVaccinated(vaccinated: bool) -> void:
 	self.isVaccinated = vaccinated
 	
-func getMasked():
+func getMasked() -> bool:
 	return self.isMasked
 	
-func setMasked(masked: bool):
+func setMasked(masked: bool) -> void:
 	self.isMasked = masked
 	
-func getEducated():
+func getEducated() -> bool:
 	return self.isEducated
 
-func setEducated(educated: bool):
+func setEducated(educated: bool) -> void:
 	self.isEducated = educated
 	
-func getJob():
+func getJob() -> Vector2i:
 	return self.job
 
-func setJob(job: Vector2i):
+func setJob(job: Vector2i) -> void:
 	self.job = job
 	
-func getResidence():
+func getResidence() -> Vector2i:
 	return self.residence
 
-func setResidence(residence: Vector2i):
+func setResidence(residence: Vector2i) -> void:
 	self.residence = residence
