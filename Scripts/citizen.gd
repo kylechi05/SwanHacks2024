@@ -10,6 +10,7 @@ var immunity: float
 
 var isVaccinated: bool
 var isMasked: bool
+var isInfected: bool
 
 # default = 0.5
 var isEducated: bool
@@ -20,7 +21,16 @@ var residence: Vector2i
 func _init(name: String, immunity: float, edu_prob: float):
 	self.name = name
 	self.immunity = immunity
+	self.isVaccinated = false
+	self.isMasked = false
+	self.isInfected = false
 	self.isEducated = randf() < edu_prob
+
+func getName() -> String:
+	return self.name
+
+func getImmunity() -> float:
+	return self.immunity
 
 func getVaccinated() -> bool:
 	return self.isVaccinated
