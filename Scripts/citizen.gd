@@ -7,30 +7,35 @@ var name: String
 # max_start = .7
 # min_start = .05
 var immunity: float
+var sick_length: int
 
 var isVaccinated: bool
 var isMasked: bool
 var isInfected: bool
-
-# default = 0.5
 var isEducated: bool
+var isDead: bool
 
 var job: Vector2i
 var residence: Vector2i
 
-func _init(name: String, immunity: float, edu_prob: float):
+func _init(name: String, immunity: float, sick_length: float, edu_prob: float):
 	self.name = name
 	self.immunity = immunity
+	self.sick_length = sick_length
 	self.isVaccinated = false
 	self.isMasked = false
 	self.isInfected = false
 	self.isEducated = randf() < edu_prob
+	self.isDead = false
 
 func getName() -> String:
 	return self.name
 
 func getImmunity() -> float:
 	return self.immunity
+	
+func getSickLength() -> int:
+	return self.sick_length
 
 func getVaccinated() -> bool:
 	return self.isVaccinated
@@ -49,6 +54,12 @@ func getEducated() -> bool:
 
 func setEducated(educated: bool) -> void:
 	self.isEducated = educated
+	
+func getDead() -> bool:
+	return self.isDead
+
+func setDead(dead) -> void:
+	self.isDead = dead
 	
 func getJob() -> Vector2i:
 	return self.job

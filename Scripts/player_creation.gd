@@ -6,28 +6,18 @@ func _ready() -> void:
 	
 	var num_people = Controller.num_people
 	var edu_prob = Controller.edu_prob
-	var imm_probs = generateProbabilities(num_people, Controller.immunity_window[0], Controller.immunity_window[1])
+	var imm_prob_window = Controller.imm_prob_window
 	var names = load_json_file("res://Data/citizen_names.json").names
 	
 	names.shuffle()
 	
 	for i in range(num_people):
-		var cit = Citizen.new(names[i], imm_probs[i], edu_prob)
-		citizens.append(cit)	
-
+		var cit = Citizen.new(names[i], randf() * (imm_prob_window["max"] - imm_prob_window["min"]) + imm_prob_window["min"], randi_range(2, 7), edu_prob)
+		citizens.append(cit)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func generateProbabilities(count: int, minimum: float, maximum: float) -> Array:
-	var probabilities = []
-	
-	for i in range(count):
-		var value = randf() * (maximum - minimum) + minimum
-		probabilities.append(value)
-		
-	return probabilities
 
 func load_json_file(filePath: String):
 	var file = FileAccess.open(filePath, FileAccess.READ)
