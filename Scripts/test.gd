@@ -1,16 +1,20 @@
 extends Sprite2D
 
 var time = 0
-var start_time = 1
+var start_time = 2
 var next_step = null
 var step_toggle = false
+
+func _ready() -> void:
+	start_time -= (randi() % 60 + 1)/30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 		
-	if Controller.LENGTH_OF_DAY < 0:
+	if Controller.TIME_OF_NIGHT < Controller.TIME_OF_DAY:
 		if step_toggle == false:
 			time = 0
-			start_time = 0.1
+			start_time = 1
+			start_time -= (randi() % 30 + 1)/30
 			next_step = null
 			Controller.reset_schedule = false
 			step_toggle = true

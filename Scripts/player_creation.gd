@@ -58,10 +58,7 @@ func create_players():
 		sprite.position = Vector2(cit.location[0] * 24, cit.location[1] * 24)
 		sprite.set_script(move_script)
 		add_child.call_deferred(sprite)
-		
-		
-		print("work", cit.getWork())
-				
+
 func randomFloatInWindow(minimum: float, maximum: float):
 	return randf() * (maximum - minimum) + minimum
 

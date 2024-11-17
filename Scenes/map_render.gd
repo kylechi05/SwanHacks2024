@@ -1,8 +1,10 @@
 extends TileMap
 
 signal finished_render
+var temp_color
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	temp_color = 1
 	var temp_file = FileAccess.open("res://GameData/map.txt", FileAccess.READ)
 	var temp_string = temp_file.get_as_text().replace('\n', '')
 	 	
@@ -12,31 +14,17 @@ func _ready() -> void:
 		Controller.collision_data.append(temp_string.substr(i*map_width, map_width) )
 		i += 1
 	#Controller.collision_data.reverse()
-	print(Controller.collision_data)
 	read_map()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if Controller.TIME_OF_DAY - 12 < 0 and Controller.LENGTH_OF_DAY == 12:
-		Controller.TIME_OF_DAY += delta*2
-		Controller.brightness = 0.5 - abs(Controller.TIME_OF_DAY - 12)/24
-		if Controller.brightness > 0.3:
-			self.set_modulate(Color(Controller.brightness,  Controller.brightness, Controller.brightness))
-		else:
-			self.set_modulate(Color(0.3, 0.3, 0.3))
-	else:
-		Controller.LENGTH_OF_DAY -= delta
-		self.set_modulate(Color(1,1,1,1))
-
-	if Controller.LENGTH_OF_DAY < 0:
-		Controller.reset_schedule = true;
-		Controller.TIME_OF_DAY += delta*2
-		Controller.brightness = 0.5 - abs(Controller.TIME_OF_DAY - 12)/24
-		if Controller.brightness > 0.3:
-			self.set_modulate(Color(Controller.brightness,  Controller.brightness, Controller.brightness))
-		else:
-			self.set_modulate(Color(0.3, 0.3, 0.3))
-	
+	Controller.TIME_OF_DAY += delta
+	if (Controller.isDay() and temp_color == 0.3):
+		temp_color = 1
+		self.set_modulate(Color(temp_color,temp_color,temp_color))
+	elif (temp_color == 1 and !(Controller.isDay())):
+		temp_color = 0.3
+		self.set_modulate(Color(temp_color, temp_color, temp_color))
 	
 func read_map():
 	var id = 0
@@ -61,7 +49,6 @@ func read_map():
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
 					id += 1
-					print(Vector2i(y,x))
 				"H":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 2))
 					Controller.places[Vector2i(y,x)] = [id, 2]
