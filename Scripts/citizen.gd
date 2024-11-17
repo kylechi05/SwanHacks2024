@@ -1,3 +1,6 @@
+# The Citizen Class defines instances of each citizen
+# Includes attributes regarding how the disease impacts the citizen
+
 extends Sprite2D
 
 class_name Citizen
@@ -24,6 +27,7 @@ var isDead: bool
 var work: Vector2i
 var home: Vector2i
 
+# initialize
 func _init(name: String, immunity: float, total_sick_length: float, edu_prob: float, home: Vector2i, work: Vector2i):
 	self.citizen_name = name
 	self.immunity = immunity
@@ -38,6 +42,8 @@ func _init(name: String, immunity: float, total_sick_length: float, edu_prob: fl
 	self.home = home
 	self.work = work
 	self.location = home
+
+# getter and setter functions for our object
 
 func getName() -> String:
 	return self.citizen_name

@@ -1,5 +1,8 @@
 extends Sprite2D
 
+# file for citizen movement
+# utilizes the A* algorithm
+
 var time = 0
 var start_time = 2
 var next_step = null

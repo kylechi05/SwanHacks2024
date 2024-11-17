@@ -1,3 +1,7 @@
+# the base file for our game
+# contains global variables that define the map, time, and data about player choices
+# also defines states of vaccines, masks, posts, and hospital beds, as well as the cyclic nature
+
 extends Node
 
 var num_people = 40

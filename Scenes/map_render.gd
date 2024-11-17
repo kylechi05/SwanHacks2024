@@ -1,3 +1,5 @@
+# renders the map
+
 extends TileMap
 
 signal finished_render
@@ -51,6 +53,8 @@ func _physics_process(delta: float) -> void:
 		
 		Controller.calc_night = true
 		
+# an "all-in-one" function to compute all new changes in data and states
+# called each noon and night
 func get_transmission_result(home, work, uninfected, infected, duringDay):
 	var hold_inf = infected
 	var hold_uninf = uninfected
@@ -112,7 +116,9 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 		"infected": hold_inf,
 		"uninfected": hold_uninf,
 	}
-	
+
+# updates the immunities of each citizen based on factors: vaccines, posts, hospital beds, and masks
+
 func update_immunities():
 	var masks = Controller.masks_total
 	var posters = Controller.posters_total
@@ -155,6 +161,7 @@ func update_immunities():
 			cit.setPosterized(true)
 			print(cit.getName())
 
+# places the posters at houses and work places
 func place_posters():
 	var houses = Controller.home_populations.keys()
 	var works = Controller.work_populations.keys()
@@ -166,7 +173,7 @@ func place_posters():
 			Controller.posters_used += 1
 			print(all_static_locations[k])
 		k += 1
-	
+# algorithm to fill the hospital beds when available
 func fill_hospital_beds():
 	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:
 		var citizen = Controller.hospital_queue.pop_front()

@@ -1,3 +1,6 @@
+# initializes the citizens, citizen sprites, and locations
+# emphasizes randomness on probabilistic computations
+
 extends Node2D
 
 
