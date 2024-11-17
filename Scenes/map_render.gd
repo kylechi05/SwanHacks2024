@@ -16,8 +16,27 @@ func _ready() -> void:
 	read_map()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if Controller.TIME_OF_DAY - 12 < 0 and Controller.LENGTH_OF_DAY == 12:
+		Controller.TIME_OF_DAY += delta*2
+		Controller.brightness = 0.5 - abs(Controller.TIME_OF_DAY - 12)/24
+		if Controller.brightness > 0.3:
+			self.set_modulate(Color(Controller.brightness,  Controller.brightness, Controller.brightness))
+		else:
+			self.set_modulate(Color(0.3, 0.3, 0.3))
+	else:
+		Controller.LENGTH_OF_DAY -= delta
+		self.set_modulate(Color(1,1,1,1))
+
+	if Controller.LENGTH_OF_DAY < 0:
+		Controller.reset_schedule = true;
+		Controller.TIME_OF_DAY += delta*2
+		Controller.brightness = 0.5 - abs(Controller.TIME_OF_DAY - 12)/24
+		if Controller.brightness > 0.3:
+			self.set_modulate(Color(Controller.brightness,  Controller.brightness, Controller.brightness))
+		else:
+			self.set_modulate(Color(0.3, 0.3, 0.3))
+	
 	
 func read_map():
 	var id = 0

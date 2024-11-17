@@ -4,7 +4,14 @@ var num_people = 40
 var edu_prob = 0.3
 var imm_prob_window = {"min": 0.05, "max": 0.70}
 var MAP_SIZE = Vector2(44,30)
-var CITIZEN_SPEED = 1.0;
+var CITIZEN_SPEED = 90;
+
+var reset_schedule = false
+
+var TIME_OF_DAY = 0.0;
+var LENGTH_OF_FADE = 12;
+var LENGTH_OF_DAY = 12;
+var brightness = 0;
 
 var places = {}
 var tile_array_0 = []
