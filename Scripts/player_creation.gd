@@ -50,11 +50,17 @@ func create_players():
 		
 		var sprite = Sprite2D.new()
 		var sprite_texture = load("res://Sprites/guy.png")
+		var move_script = load("res://Scripts/test.gd")
+		
 		sprite.name = cit.getName()
 		sprite.set_meta("object_reference", cit)
 		sprite.texture = sprite_texture
 		sprite.position = Vector2(cit.location[0] * 24, cit.location[1] * 24)
+		sprite.set_script(move_script)
 		add_child.call_deferred(sprite)
+		
+		
+		print("work", cit.getWork())
 				
 func randomFloatInWindow(minimum: float, maximum: float):
 	return randf() * (maximum - minimum) + minimum

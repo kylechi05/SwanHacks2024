@@ -5,7 +5,7 @@ var next_step = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if time == 0:
-		next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, 1)
+		next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, Controller.places[self.get_meta("object_reference").getWork()][0])
 		time += delta*30
 	else:
 		time += delta
