@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=15 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
 [ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
 [ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
+[ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -123,6 +124,110 @@ TOTAL VAXXES: 3
 "
 metadata/_edit_use_anchors_ = true
 
+[node name="UIBed" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 840.0
+offset_top = -688.0
+offset_right = 1043.0
+offset_bottom = -646.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "bed"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2767
+anchor_top = 7.97619
+anchor_right = -0.375222
+anchor_bottom = 7.97619
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "BED $1500"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIPoster" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 844.0
+offset_top = -624.0
+offset_right = 1047.0
+offset_bottom = -582.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "post"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIPoster"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.345665
+anchor_top = 7.95238
+anchor_right = -0.345665
+anchor_bottom = 7.95238
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "POSTER $100"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIMask" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 838.0
+offset_top = -560.0
+offset_right = 1041.0
+offset_bottom = -518.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "mask"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIMask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "MASK $20"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIVax" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 839.0
+offset_top = -488.0
+offset_right = 1042.0
+offset_bottom = -446.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "vax"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIVax"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "VAX $250"
+metadata/_edit_use_anchors_ = true
+
 [node name="UIContinue" type="TextureRect" parent="Camera2D/UIBack"]
 offset_left = 836.0
 offset_top = -164.0
@@ -132,59 +237,22 @@ texture = ExtResource("8_rvkss")
 script = ExtResource("9_8m4da")
 func_name = "next_day"
 
-[node name="UIVaxButton2" type="Sprite2D" parent="Camera2D/UIBack"]
-position = Vector2(36.17, 164)
-texture = ExtResource("8_rvkss")
-centered = false
-offset = Vector2(800, -660)
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIVaxButton2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIContinue"]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.403941
-anchor_right = -0.403941
-offset_left = 876.0
-offset_top = -663.0
-offset_right = 1071.0
-offset_bottom = -624.0
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("7_pwnpt")
 theme_override_font_sizes/normal_font_size = 48
-text = "VAXX $250"
-
-[node name="UIMaskButton" type="Sprite2D" parent="Camera2D/UIBack"]
-position = Vector2(36.17, 103)
-texture = ExtResource("8_rvkss")
-centered = false
-offset = Vector2(800, -660)
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIMaskButton"]
-anchors_preset = -1
-anchor_left = -0.261084
-anchor_right = -0.261084
-offset_left = 831.0
-offset_top = -662.0
-offset_right = 1026.0
-offset_bottom = -623.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("7_pwnpt")
-theme_override_font_sizes/normal_font_size = 48
-text = "MASK $20"
-
-[node name="UIPostButton" type="Sprite2D" parent="Camera2D/UIBack"]
-position = Vector2(36.17, 40)
-texture = ExtResource("8_rvkss")
-centered = false
-offset = Vector2(800, -660)
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIPostButton"]
-offset_left = 806.0
-offset_top = -662.0
-offset_right = 1001.0
-offset_bottom = -623.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("7_pwnpt")
-theme_override_font_sizes/normal_font_size = 48
-text = "POSTER $100"
+text = "CONTINUE"
+metadata/_edit_use_anchors_ = true
 
 [node name="Money Stats" type="RichTextLabel" parent="Camera2D/UIBack"]
 offset_left = 848.0
@@ -203,21 +271,6 @@ text = "BUDGET:
 -$200
 -----------
  $1050"
-
-[node name="UIBedButton" type="Sprite2D" parent="Camera2D/UIBack"]
-position = Vector2(36.17, -33)
-texture = ExtResource("8_rvkss")
-centered = false
-offset = Vector2(800, -660)
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBedButton"]
-offset_left = 822.0
-offset_top = -661.0
-offset_right = 989.0
-offset_bottom = -622.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("7_pwnpt")
-theme_override_font_sizes/normal_font_size = 48
-text = "BED $1500"
+script = ExtResource("11_gi6aj")
 
 [connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]

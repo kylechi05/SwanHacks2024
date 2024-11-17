@@ -21,17 +21,21 @@ var BED_COST = 1500
 var POST_COST = 250
 var MASK_COST = 20
 
-
+var get_money = true
 var total_money = 0
 
 var brightness = 0
-
-var ui_y = -720
 
 var beds_bought = 0
 var vaccines_bought = 0
 var posters_bought = 0
 var masks_bought = 0
+
+var beds_total = 0
+var beds_used = 0
+var vaccines_total = 0
+var posters_total = 0
+var masks_total = 0
 
 var places = {}
 var tile_array_0 = []
@@ -64,6 +68,15 @@ func isDay():
 
 func next_day():
 	print("called")
+	Controller.beds_total += beds_bought
+	Controller.masks_total += masks_bought
+	Controller.posters_total += posters_bought
+	Controller.vaccines_total += vaccines_bought
+	vaccines_bought
+	posters_bought = 0
+	masks_bought = 0
+	beds_bought = 0
+	get_money = false
 	Controller.current_day += 1
 	Controller.TIME_OF_DAY = -3
 	for i in range(citizenSprites.size()):
@@ -71,6 +84,27 @@ func next_day():
 		var script = citizenSprites[i][1]
 		sprite.script = null
 		sprite.set_script(script)
+
+func vax():
+	if Controller.total_money - Controller.VAX_COST >= 0: 
+		Controller.vaccines_bought += 1
+		Controller.total_money -= Controller.VAX_COST
+
+func post():
+	if Controller.total_money - Controller.POST_COST >= 0: 
+		Controller.posters_bought += 1
+		Controller.total_money -= Controller.POST_COST
+
+func mask():
+	if Controller.total_money - Controller.MASK_COST >= 0: 
+		Controller.masks_bought += 1
+		Controller.total_money -= Controller.MASK_COST
+
+func bed():
+	if Controller.total_money - Controller.BED_COST >= 0: 
+		Controller.beds_bought += 1
+		Controller.total_money -= Controller.BED_COST
+	
 
 func item_overlap(item_position, item_size, mouse_position):
 	return item_position.x < mouse_position.x and mouse_position.x < (item_position.x + item_size.x) and item_position.y < mouse_position.y and mouse_position.y < (item_position.y + item_size.y)
