@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlv2mpkhaqq0q"]
+
+[ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="1_kjkl4"]
+[ext_resource type="Script" path="res://Scenes/good_ending.gd" id="2_irf5g"]
+
+[node name="Die" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 31.0
+offset_top = 25.0
+offset_right = 1031.0
+offset_bottom = 579.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_kjkl4")
+theme_override_font_sizes/normal_font_size = 48
+text = "Good job, you had people survive the disease. Thank you for playing Spreadsim!"
+script = ExtResource("2_irf5g")

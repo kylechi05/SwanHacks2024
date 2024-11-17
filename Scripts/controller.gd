@@ -1,12 +1,12 @@
 extends Node
 
-var num_people = 80
+var num_people = 40
 var edu_prob = 0.3
 var imm_prob_window = {"min": 0.25, "max": 0.85}
 var MAP_SIZE = Vector2(44,30)
 var CITIZEN_SPEED = 90;
 
-var TOTAL_DAYS = 7
+var TOTAL_DAYS = 30
 var current_day = 0
 
 var reset_schedule = false
@@ -22,7 +22,7 @@ var POST_COST = 100
 var MASK_COST = 20
 
 var get_money = true
-var total_money = 0
+var total_money = 1000
 
 var brightness = 0
 
@@ -96,6 +96,10 @@ func next_day():
 	Controller.total_money += Controller.MONEY_PER_DAY
 	get_money = true
 	Controller.current_day += 1
+	if len(Controller.dead) == Controller.num_people:
+		get_tree().change_scene_to_file("res://Scenes/die.tscn")
+	if Controller.current_day > Controller.TOTAL_DAYS:
+		get_tree().change_scene_to_file("res://Scenes/live.tscn")
 	Controller.TIME_OF_DAY = -3
 	Controller.calc_start = false
 	Controller.calc_night = false
