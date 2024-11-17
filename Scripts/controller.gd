@@ -2,7 +2,7 @@ extends Node
 
 var num_people = 80
 var edu_prob = 0.3
-var imm_prob_window = {"min": 0.99, "max": 0.99}
+var imm_prob_window = {"min": 0.45, "max": 0.80}
 var MAP_SIZE = Vector2(44,30)
 var CITIZEN_SPEED = 90;
 
