@@ -27,34 +27,42 @@ func read_map():
 				#2 = house
 				#3 = workplace
 				"0":
-					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
+					var temp_int = randi() % 3
+					match temp_int:
+						0:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
+						1:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 8))
+						2:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 9))
 				"r":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 1))
 					Controller.places[Vector2i(y,x)] = [id, 1]
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
+					id += 1
+					print(Vector2i(y,x))
 				"H":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 2))
 					Controller.places[Vector2i(y,x)] = [id, 2]
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
+					id += 1
 				"h":
-					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 2))
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 3))
 				"w":
-					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 3))
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 5))
 				"W":
-					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 3))
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 4))
 					Controller.places[Vector2i(y,x)] = [id, 3]
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
-			id += 1
+					id += 1
 
 func init_astar(x, y):
 		if x > 0:
 			if Controller.places.has(Vector2i(y,x-1)):
-				Controller.citizen_astar.connect_points(Controller.places[Vector2i(y,x-1)][0], Controller.places[Vector2i(y,x)][0], false)
+				Controller.citizen_astar.connect_points(Controller.places[Vector2i(y,x-1)][0], Controller.places[Vector2i(y,x)][0], true)
 		if y > 0:
 			if Controller.places.has(Vector2i(y-1,x)):
-				Controller.citizen_astar.connect_points(Controller.places[Vector2i(y-1,x)][0], Controller.places[Vector2i(y,x)][0], false)
-		
-		print(Controller.citizen_astar.get_point_count())
+				Controller.citizen_astar.connect_points(Controller.places[Vector2i(y-1,x)][0], Controller.places[Vector2i(y,x)][0], true)
