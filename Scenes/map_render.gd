@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	if Controller.TIME_OF_DAY < 0 and not Controller.calc_start:
 		fill_hospital_beds()
 		update_immunities()
+		place_posters()
 		Controller.calc_start = true
 	if Controller.TIME_OF_DAY > 12 and not Controller.calc_noon:
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
@@ -146,6 +147,25 @@ func update_immunities():
 			k += 1
 		else:
 			break
+			
+	# poster calculations
+	for i in range(Controller.citizenSprites.size()):
+		var cit = Controller.citizenSprites[i][0].get_meta("object_reference")
+		if (cit.getWork() in Controller.poster_locations or cit.getHome() in Controller.poster_locations) and not cit.getPosterized():
+			cit.setPosterized(true)
+			print(cit.getName())
+
+func place_posters():
+	var houses = Controller.home_populations.keys()
+	var works = Controller.work_populations.keys()
+	var all_static_locations = houses + works
+	var k = 0
+	while Controller.posters_used < Controller.posters_total and Controller.posters_used < houses.size() + works.size():
+		if all_static_locations[k] not in Controller.poster_locations:
+			Controller.poster_locations.append(all_static_locations[k])
+			Controller.posters_used += 1
+			print(all_static_locations[k])
+		k += 1
 	
 func fill_hospital_beds():
 	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:

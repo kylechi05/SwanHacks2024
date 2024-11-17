@@ -41,6 +41,7 @@ var beds_used = 0
 var vaccines_total = 0
 var vaccines_used = 0
 var posters_total = 0
+var posters_used = 0
 var masks_total = 0
 var masks_used = 0
 
@@ -59,6 +60,7 @@ var infected = []
 var uninfected = []
 var dead = []
 var hospital_queue = []
+var poster_locations = []
 
 var citizenSprites = []
 var sickTexture = load("res://Sprites/guysick.png")

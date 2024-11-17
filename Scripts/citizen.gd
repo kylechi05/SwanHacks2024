@@ -18,6 +18,7 @@ var isMasked: bool
 var isInfected: bool
 var isHospitalized: bool
 var isEducated: bool
+var isPosterized: bool
 var isDead: bool
 
 var work: Vector2i
@@ -31,6 +32,7 @@ func _init(name: String, immunity: float, total_sick_length: float, edu_prob: fl
 	self.isMasked = false
 	self.isInfected = false
 	self.isEducated = randf() < edu_prob
+	self.isPosterized = false
 	self.isHospitalized = false
 	self.isDead = false
 	self.home = home
@@ -80,6 +82,14 @@ func getEducated() -> bool:
 
 func setEducated(educated: bool) -> void:
 	self.isEducated = educated
+	
+func getPosterized() -> bool:
+	return self.isPosterized
+	
+func setPosterized(posterized: bool) -> void:
+	self.isPosterized = posterized
+	if self.getEducated():
+		self.immunity += 0.05
 	
 func getInfected() -> bool:
 	return self.isInfected
