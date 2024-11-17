@@ -39,14 +39,35 @@ func create_players():
 	num_work = work.size()
 	
 	for i in range(num_people):
+		var rand_house = houses[randi_range(0, num_houses - 1)]
+		var rand_work = work[randi_range(0, num_work - 1)]
+		
 		var cit = Citizen.new(
 			names[i],
 			randomFloatInWindow(imm_prob_window["min"], imm_prob_window["max"]),
 			randi_range(2, 7), edu_prob,
-			houses[randi_range(0, num_houses - 1)],
-			work[randi_range(0, num_work - 1)]
+			rand_house,
+			rand_work
 		)
 		citizens.append(cit)
+		
+		if rand_house in Controller.home_populations:
+			Controller.home_populations[rand_house].append(cit)
+		else:
+			Controller.home_populations[rand_house] = [cit]
+		Controller.uninfected.append(cit)
+			
+		if rand_work in Controller.work_populations:
+			Controller.work_populations[rand_work].append(cit)
+		else:
+			Controller.work_populations[rand_work] = [cit]
+			
+		if i == num_people - 1:
+			Controller.uninfected.erase(cit)
+			Controller.infected.append(cit)
+			
+			cit.setInfected(true)
+		
 		
 		var sprite = Sprite2D.new()
 		var sprite_texture = load("res://Sprites/guy.png")

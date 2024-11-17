@@ -18,6 +18,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	Controller.TIME_OF_DAY += delta
 	if (Controller.isDay() and temp_color == 0.3):
 		temp_color = 1
@@ -25,6 +26,64 @@ func _physics_process(delta: float) -> void:
 	elif (temp_color == 1 and !(Controller.isDay())):
 		temp_color = 0.3
 		self.set_modulate(Color(temp_color, temp_color, temp_color))
+	
+	if Controller.TIME_OF_DAY > 12 and not Controller.calc_noon:
+		print(Controller.home_populations)
+		print(Controller.work_populations)
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+		
+		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
+		Controller.infected = change_infections["infected"]
+		Controller.uninfected = change_infections["uninfected"]
+		
+		Controller.calc_noon = true
+		
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+
+		
+	if Controller.TIME_OF_DAY > 24 and not Controller.calc_night:
+		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, false)
+		Controller.infected = change_infections["infected"]
+		Controller.uninfected = change_infections["uninfected"]
+		
+		Controller.calc_night = true
+		
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+		
+func get_transmission_result(home, work, uninfected, infected, duringDay):
+	var hold_inf = infected
+	var hold_uninf = uninfected
+	
+	for inf in infected:
+		var loc
+		
+		if duringDay:
+			loc = inf.getWork()
+			for citizen in work[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
+					citizen.setInfected(true)
+					citizen.setHospitalized(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+		else:
+			loc = inf.getHome()
+			for citizen in home[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
+					citizen.setInfected(true)
+					citizen.setHospitalized(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+
+	return {
+		"infected": hold_inf,
+		"uninfected": hold_uninf,
+	}
 	
 func read_map():
 	var id = 0
@@ -59,9 +118,18 @@ func read_map():
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 3))
 				"w":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 5))
+				"i":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 7))
 				"W":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 4))
 					Controller.places[Vector2i(y,x)] = [id, 3]
+					Controller.citizen_astar.add_point(id,Vector2i(y,x))
+					init_astar(x,y)
+					id += 1
+				"I":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 6))
+					Controller.places[Vector2i(y,x)] = [id, 4]
+					print(id)
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
 					id += 1

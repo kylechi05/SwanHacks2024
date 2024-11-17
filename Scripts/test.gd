@@ -19,7 +19,10 @@ func _physics_process(delta: float) -> void:
 			step_toggle = true
 		else:
 			if time == 0:
-				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, Controller.places[self.get_meta("object_reference").getHome()][0])
+				var loc = 7
+				if not self.get_meta("object_reference").getHospitalized():
+					loc = Controller.places[self.get_meta("object_reference").getHome()][0]
+				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, loc)
 				time += delta*Controller.CITIZEN_SPEED
 			else:
 				time += delta
@@ -32,7 +35,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		if start_time < 0:
 			if time == 0:
-				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, Controller.places[self.get_meta("object_reference").getWork()][0])
+				var loc = 7
+				if not self.get_meta("object_reference").getHospitalized():
+					loc = Controller.places[self.get_meta("object_reference").getWork()][0]
+				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, loc)
 				time += delta*Controller.CITIZEN_SPEED
 			else:
 				time += delta
