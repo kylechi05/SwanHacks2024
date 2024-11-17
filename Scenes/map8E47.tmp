@@ -1,8 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=22 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
-[ext_resource type="Texture2D" uid="uid://udthqbuohb4p" path="res://Sprites/fish.png" id="2_4l8ey"]
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
 [ext_resource type="AudioStream" uid="uid://2uur2p442k10" path="res://Audio/OverWorld1.mp3" id="4_2qjog"]
 [ext_resource type="Texture2D" uid="uid://w55wt4gp0kyo" path="res://Sprites/ui_back.png" id="5_sp2wy"]
@@ -18,20 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b33m0erdt2pn8" path="res://Sprites/cloud1.png" id="14_7kx38"]
 [ext_resource type="Script" path="res://Scenes/cloud.gd" id="15_e6208"]
 [ext_resource type="Texture2D" uid="uid://c3pup41vyc13f" path="res://Sprites/cloud2.png" id="17_a1t2x"]
-
-[sub_resource type="Gradient" id="Gradient_7cigc"]
-offsets = PackedFloat32Array(0.110169, 0.169492)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ousgp"]
-gradient = SubResource("Gradient_7cigc")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s071r"]
-particle_flag_disable_z = true
-direction = Vector3(1, -200, 0)
-gravity = Vector3(-40, 20, 0)
-color_ramp = SubResource("GradientTexture1D_ousgp")
-turbulence_enabled = true
+[ext_resource type="PackedScene" uid="uid://bcng811ntsp0f" path="res://Saves/gpu_particles_2d.tscn" id="18_htypq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -51,11 +37,6 @@ texture_region_size = Vector2i(24, 24)
 0:12/0 = 0
 0:13/0 = 0
 0:14/0 = 0
-0:15/0 = 0
-0:16/0 = 0
-0:17/0 = 0
-0:18/0 = 0
-0:19/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_bud3e"]
 tile_size = Vector2i(24, 24)
@@ -68,14 +49,6 @@ script = ExtResource("1_1hx2l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(528, 360)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D"]
-z_index = 100
-position = Vector2(944, 96)
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_s071r")
-texture = ExtResource("2_4l8ey")
-lifetime = 30.0
 
 [node name="TileMap" type="TileMap" parent="Camera2D"]
 tile_set = SubResource("TileSet_bud3e")
@@ -371,5 +344,7 @@ position = Vector2(354, 559)
 texture = ExtResource("17_a1t2x")
 centered = false
 script = ExtResource("15_e6208")
+
+[node name="GPUParticles2D" parent="Camera2D" instance=ExtResource("18_htypq")]
 
 [connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]
