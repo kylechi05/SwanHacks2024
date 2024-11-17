@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=26 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
 [ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
 [ext_resource type="Script" path="res://Scripts/ui_math.gd" id="9_eurom"]
+[ext_resource type="Script" path="res://Scenes/info_stat.gd" id="10_8tfgj"]
 [ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
 [ext_resource type="Texture2D" uid="uid://n3586n4m4yoa" path="res://Sprites/rows.png" id="13_teip1"]
 [ext_resource type="Texture2D" uid="uid://513navj1joyj" path="res://Sprites/cloud.png" id="14_4bh8y"]
@@ -87,7 +88,7 @@ script = ExtResource("2_m6xmo")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Camera2D"]
 stream = ExtResource("4_2qjog")
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [node name="UIBack" type="Sprite2D" parent="Camera2D"]
 z_index = 1000
@@ -127,6 +128,7 @@ DAYS LEFT:
 
 
 -----------------------"
+script = ExtResource("10_8tfgj")
 
 [node name="UIPrint2" type="Sprite2D" parent="Camera2D/UIBack"]
 position = Vector2(397, -40)

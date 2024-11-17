@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bljaon0lldoik"]
+[gd_scene load_steps=5 format=3 uid="uid://diabff4sss7rr"]
 
 [ext_resource type="Texture2D" uid="uid://wv18kjh34fct" path="res://Sprites/startbackground.png" id="1_5dylq"]
 [ext_resource type="Texture2D" uid="uid://coo6kca4nv4kt" path="res://Sprites/logobutton.png" id="2_hjl8i"]
@@ -25,3 +25,7 @@ offset_bottom = 642.0
 texture = ExtResource("3_ephvo")
 script = ExtResource("4_2kprr")
 func_name = "start"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

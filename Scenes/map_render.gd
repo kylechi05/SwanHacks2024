@@ -35,13 +35,10 @@ func _physics_process(delta: float) -> void:
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
 		Controller.infected = change_infections["infected"]
 		Controller.uninfected = change_infections["uninfected"]
-		
 		Controller.calc_noon = true
 
-		
 	if Controller.TIME_OF_DAY > 24 and not Controller.calc_night:
 		if Controller.get_money == true:
-			Controller.total_money += 500
 			Controller.get_money = false
 			Controller.available_bed = randi_range(1, 4)
 			Controller.available_vax = randi_range(2, 9)
