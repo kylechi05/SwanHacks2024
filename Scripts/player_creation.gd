@@ -1,4 +1,5 @@
-extends Node
+extends Node2D
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,6 +48,14 @@ func create_players():
 		)
 		citizens.append(cit)
 		
+		var sprite = Sprite2D.new()
+		var sprite_texture = load("res://Sprites/guy.png")
+		sprite.name = cit.getName()
+		sprite.set_meta("object_reference", cit)
+		sprite.texture = sprite_texture
+		sprite.position = Vector2(cit.location[0] * 24, cit.location[1] * 24)
+		add_child.call_deferred(sprite)
+				
 func randomFloatInWindow(minimum: float, maximum: float):
 	return randf() * (maximum - minimum) + minimum
 

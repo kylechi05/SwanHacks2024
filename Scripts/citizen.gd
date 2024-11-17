@@ -1,6 +1,8 @@
+extends Sprite2D
+
 class_name Citizen
 
-var name: String
+var citizen_name: String
 var location: Vector2i
 
 # range = 0.0 - 1.0
@@ -20,7 +22,7 @@ var work: Vector2i
 var home: Vector2i
 
 func _init(name: String, immunity: float, sick_length: float, edu_prob: float, home: Vector2i, work: Vector2i):
-	self.name = name
+	self.citizen_name = name
 	self.immunity = immunity
 	self.sick_length = sick_length
 	self.isVaccinated = false
@@ -33,7 +35,7 @@ func _init(name: String, immunity: float, sick_length: float, edu_prob: float, h
 	self.location = home
 
 func getName() -> String:
-	return self.name
+	return self.citizen_name
 
 func getLocation() -> Vector2i:
 	return self.location
