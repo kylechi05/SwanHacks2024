@@ -71,14 +71,17 @@ func create_players():
 		
 		
 		var sprite = Sprite2D.new()
-		var sprite_texture = load("res://Sprites/guy.png")
 		var move_script = load("res://Scripts/test.gd")
 		
 		citizenSprites.append([sprite, move_script])
 		
 		sprite.name = cit.getName()
 		sprite.set_meta("object_reference", cit)
-		sprite.texture = sprite_texture
+		sprite.texture = Controller.guyTexture
+		
+		if i == num_people - 1:
+			sprite.texture = Controller.sickTexture
+		
 		sprite.position = Vector2(cit.location[0] * 24, cit.location[1] * 24)
 		sprite.set_script(move_script)
 		add_child.call_deferred(sprite)

@@ -66,23 +66,6 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 	for inf in infected:
 		var loc
 		
-		if duringDay:
-			loc = inf.getWork()
-			for citizen in work[loc]:
-				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
-					citizen.setInfected(true)
-					hold_uninf.erase(citizen)
-					hold_inf.append(citizen)
-					Controller.hospital_queue.append(citizen)
-		else:
-			loc = inf.getHome()
-			for citizen in home[loc]:
-				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
-					citizen.setInfected(true)
-					hold_uninf.erase(citizen)
-					hold_inf.append(citizen)
-					Controller.hospital_queue.append(citizen)
-					
 		if inf.getCurrentSickLength() >= inf.getTotalSickLength():
 			var prob_dead = 0.5 # fatality rate
 			if inf.getHospitalized():
@@ -95,9 +78,43 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 			else:
 				inf.setInfected(false)
 				hold_uninf.append(inf)
+				for i in range(Controller.citizenSprites.size()):
+					if Controller.citizenSprites[i][0].name == inf.getName():
+						if inf.getVaccinated():
+							Controller.citizenSprites[i][0].texture = Controller.vaxTexture
+						else:
+							Controller.citizenSprites[i][0].texture = Controller.guyTexture
+						break
 			hold_inf.erase(inf)
-		else:
+		else:	
 			inf.setCurrentSickLength(inf.getCurrentSickLength() + 0.5)
+		
+		if duringDay:
+			loc = inf.getWork()
+			for citizen in work[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1 - citizen.getImmunity():
+					citizen.setInfected(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+					Controller.hospital_queue.append(citizen)
+					for i in range(Controller.citizenSprites.size()):
+						if Controller.citizenSprites[i][0].name == citizen.getName():
+							Controller.citizenSprites[i][0].texture = Controller.sickTexture
+							break
+		else:
+			loc = inf.getHome()
+			for citizen in home[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 0.05 * (1 - citizen.getImmunity()):
+					citizen.setInfected(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+					Controller.hospital_queue.append(citizen)
+					for i in range(Controller.citizenSprites.size()):
+						if Controller.citizenSprites[i][0].name == citizen.getName():
+							Controller.citizenSprites[i][0].texture = Controller.sickTexture
+							break
+					
+		
 			
 	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:
 		var citizen = Controller.hospital_queue.pop_front()
@@ -155,7 +172,6 @@ func read_map():
 				"I":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 6))
 					Controller.places[Vector2i(y,x)] = [id, 4]
-					print(id)
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)
 					id += 1

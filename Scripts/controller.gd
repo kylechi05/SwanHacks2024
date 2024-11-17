@@ -2,7 +2,7 @@ extends Node
 
 var num_people = 80
 var edu_prob = 0.3
-var imm_prob_window = {"min": 0.05, "max": 0.70}
+var imm_prob_window = {"min": 0.25, "max": 0.85}
 var MAP_SIZE = Vector2(44,30)
 var CITIZEN_SPEED = 90;
 
@@ -53,6 +53,9 @@ var dead = []
 var hospital_queue = []
 
 var citizenSprites = []
+var sickTexture = load("res://Sprites/guysick.png")
+var vaxTexture = load("res://Sprites/guyvax.png")
+var guyTexture = load("res://Sprites/guy.png")
 
 func find_next_step(x, y, destination):
 	var temp_vect = Vector2i(x/24, y/24)
