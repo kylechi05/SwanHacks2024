@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://diabff4sss7rr"]
+
+[ext_resource type="Texture2D" uid="uid://wv18kjh34fct" path="res://Sprites/startbackground.png" id="1_5dylq"]
+[ext_resource type="Texture2D" uid="uid://coo6kca4nv4kt" path="res://Sprites/logobutton.png" id="2_hjl8i"]
+[ext_resource type="Texture2D" uid="uid://dvablvd1lkiv3" path="res://Sprites/startbutton.png" id="3_ephvo"]
+[ext_resource type="Script" path="res://Scripts/button_cont.gd" id="4_2kprr"]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5dylq")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-136, 96)
+scale = Vector2(2, 2)
+texture = ExtResource("2_hjl8i")
+centered = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 365.0
+offset_top = 521.0
+offset_right = 703.0
+offset_bottom = 642.0
+texture = ExtResource("3_ephvo")
+script = ExtResource("4_2kprr")
+func_name = "start"

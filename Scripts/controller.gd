@@ -76,6 +76,13 @@ func move_to_next_step(citizen, destination, time):
 func isDay():
 	return Controller.TIME_OF_DAY > Controller.TIME_OF_MORN and Controller.TIME_OF_DAY < Controller.TIME_OF_NIGHT
 
+func start():
+	get_tree().change_scene_to_file("res://Scenes/instruct.tscn")
+
+func go_map():
+	get_tree().change_scene_to_file("res://Scenes/map.tscn")
+	
+
 func next_day():
 	Controller.beds_total += beds_bought
 	Controller.masks_total += masks_bought

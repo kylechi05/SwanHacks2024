@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg6d8fyehk7kt"]
+
+[ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="3_55nkd"]
+[ext_resource type="Texture2D" uid="uid://dvablvd1lkiv3" path="res://Sprites/startbutton.png" id="3_bvrgi"]
+[ext_resource type="Script" path="res://Scripts/button_cont.gd" id="4_a5jg7"]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 702.0
+offset_top = 588.0
+offset_right = 1040.0
+offset_bottom = 709.0
+texture = ExtResource("3_bvrgi")
+script = ExtResource("4_a5jg7")
+func_name = "go_map"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 31.0
+offset_top = 25.0
+offset_right = 1031.0
+offset_bottom = 579.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_55nkd")
+theme_override_font_sizes/normal_font_size = 48
+text = "Welcome to SpreadSim, TODAY WE WILL BE LEARNING ABOUT HOW EPIDIMIOLOGY DICTATES THE WAY DISEASES SPREAD AND HOW WE CAN COMBAT THE SPREAD WITH TOOLS SUCH AS:
+
+-VACCINeS
+
+-MASKS
+
+-EDUCATIONAL MATERIALS
+
+-HEALTHCARE FACILITIES (SUCH AS HOSPITAL BEDS)
+
+WATCH AS THE DISEASE SPREADS FROM PERSON TO PERSON IN THE SIMULATION AND USE YOUR DAILY INCOME TO HELP PROTECT THE CITY FROM CERTAIN DOOM! "
