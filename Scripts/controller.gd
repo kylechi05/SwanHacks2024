@@ -2,7 +2,7 @@ extends Node
 
 var num_people = 80
 var edu_prob = 0.3
-var imm_prob_window = {"min": 0.25, "max": 0.85}
+var imm_prob_window = {"min": 0.99, "max": 0.99}
 var MAP_SIZE = Vector2(44,30)
 var CITIZEN_SPEED = 90;
 
@@ -39,8 +39,10 @@ var available_vax = 0
 var beds_total = 0
 var beds_used = 0
 var vaccines_total = 0
+var vaccines_used = 0
 var posters_total = 0
 var masks_total = 0
+var masks_used = 0
 
 var places = {}
 var tile_array_0 = []
@@ -89,7 +91,7 @@ func next_day():
 	Controller.masks_total += masks_bought
 	Controller.posters_total += posters_bought
 	Controller.vaccines_total += vaccines_bought
-	vaccines_bought
+	vaccines_bought = 0
 	posters_bought = 0
 	masks_bought = 0
 	beds_bought = 0

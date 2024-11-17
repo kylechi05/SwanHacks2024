@@ -26,11 +26,11 @@ func _physics_process(delta: float) -> void:
 	elif (temp_color == 1 and !(Controller.isDay())):
 		temp_color = 0.3
 		self.set_modulate(Color(temp_color, temp_color, temp_color))
+		
 	if Controller.TIME_OF_DAY < 0 and not Controller.calc_start:
 		fill_hospital_beds()
+		update_immunities()
 		Controller.calc_start = true
-		
-	
 	if Controller.TIME_OF_DAY > 12 and not Controller.calc_noon:
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
 		Controller.infected = change_infections["infected"]
@@ -53,18 +53,12 @@ func _physics_process(delta: float) -> void:
 		
 		Controller.calc_night = true
 		
-		print("inf", Controller.infected)
-		print("uninf", Controller.uninfected)
-		print("dead", Controller.dead)
-		print(" ")
-		
 func get_transmission_result(home, work, uninfected, infected, duringDay):
 	var hold_inf = infected
 	var hold_uninf = uninfected
 	
 	for inf in infected:
 		var loc
-		print("Curr ", inf.getCurrentSickLength(), " Total ", inf.getTotalSickLength())
 		if inf.getCurrentSickLength() >= inf.getTotalSickLength():
 			var prob_dead = 0.5 # fatality rate
 			if inf.getHospitalized():
@@ -120,6 +114,41 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 		"infected": hold_inf,
 		"uninfected": hold_uninf,
 	}
+	
+func update_immunities():
+	var masks = Controller.masks_total
+	var posters = Controller.posters_total
+	
+	# vaccine calculations
+	var k = 0
+	while Controller.vaccines_used < Controller.vaccines_total:
+		if k < Controller.uninfected.size():
+			if not Controller.uninfected[k].getVaccinated():
+				var currCit = Controller.uninfected[k]
+				currCit.setVaccinated(true)
+				Controller.vaccines_used += 1
+				for i in range(Controller.citizenSprites.size()):
+					if Controller.citizenSprites[i][0].name == currCit.getName():
+						Controller.citizenSprites[i][0].texture = Controller.vaxTexture
+						break
+			k += 1
+		else:
+			break
+	
+	# mask calculations
+	for i in range(Controller.citizenSprites.size()):
+		var cit = Controller.citizenSprites[i][0].get_meta("object_reference")
+		if cit.getMasked():
+			cit.setMasked(false)
+			
+	k = 0
+	while Controller.masks_used < Controller.masks_total:
+		if k < Controller.uninfected.size():
+			Controller.uninfected[k].setMasked(true)
+			Controller.masks_used += 1
+			k += 1
+		else:
+			break
 	
 func fill_hospital_beds():
 	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:

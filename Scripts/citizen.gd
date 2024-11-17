@@ -63,12 +63,17 @@ func getVaccinated() -> bool:
 	
 func setVaccinated(vaccinated: bool) -> void:
 	self.isVaccinated = vaccinated
+	self.immunity = 0.85
 	
 func getMasked() -> bool:
 	return self.isMasked
 	
 func setMasked(masked: bool) -> void:
 	self.isMasked = masked
+	if masked:
+		self.immunity += 0.10
+	else:
+		self.immunity -= 0.10
 	
 func getEducated() -> bool:
 	return self.isEducated
