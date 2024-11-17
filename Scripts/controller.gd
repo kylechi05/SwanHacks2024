@@ -13,9 +13,6 @@ var citizen_astar = AStar2D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-<<<<<<< Updated upstream
- pass
-=======
 	pass
 
 func find_next_step(x, y, destination):
@@ -29,4 +26,3 @@ func find_next_step(x, y, destination):
 
 func move_to_next_step(citizen, destination, time):
 	citizen.global_position = (citizen.global_position.lerp(destination*24, time))
->>>>>>> Stashed changes
