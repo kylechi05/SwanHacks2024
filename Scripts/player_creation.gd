@@ -15,6 +15,7 @@ func load_json_file(filePath: String):
 	
 func create_players():
 	var citizens: Array
+	var citizenSprites = Controller.citizenSprites
 	
 	var num_people = Controller.num_people
 	var edu_prob = Controller.edu_prob
@@ -51,6 +52,8 @@ func create_players():
 		var sprite = Sprite2D.new()
 		var sprite_texture = load("res://Sprites/guy.png")
 		var move_script = load("res://Scripts/test.gd")
+		
+		citizenSprites.append([sprite, move_script])
 		
 		sprite.name = cit.getName()
 		sprite.set_meta("object_reference", cit)

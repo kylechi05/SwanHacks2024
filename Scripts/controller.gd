@@ -42,6 +42,8 @@ var citizen_astar = AStar2D.new()
 var tiles_currently_populated = []
 var tile_content = []
 
+var citizenSprites = []
+
 func find_next_step(x, y, destination):
 	var temp_vect = Vector2i(x/24, y/24)
 	var next_step = Controller.places[temp_vect][0]
@@ -57,9 +59,14 @@ func isDay():
 	return Controller.TIME_OF_DAY > Controller.TIME_OF_MORN and Controller.TIME_OF_DAY < Controller.TIME_OF_NIGHT
 
 func next_day():
+	print("called")
 	Controller.current_day += 1
 	Controller.TIME_OF_DAY = -3
-	
+	for i in range(citizenSprites.size()):
+		var sprite = citizenSprites[i][0]
+		var script = citizenSprites[i][1]
+		sprite.script = null
+		sprite.set_script(script)
 
 func item_overlap(item_position, item_size, mouse_position):
 	return item_position.x < mouse_position.x and mouse_position.x < (item_position.x + item_size.x) and item_position.y < mouse_position.y and mouse_position.y < (item_position.y + item_size.y)

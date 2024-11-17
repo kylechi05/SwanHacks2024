@@ -140,7 +140,7 @@ offset = Vector2(800, -660)
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIVaxButton2"]
 anchors_preset = -1
-anchor_left = -0.261084
+anchor_left = -0.403941
 anchor_right = -0.403941
 offset_left = 876.0
 offset_top = -663.0
@@ -159,6 +159,7 @@ offset = Vector2(800, -660)
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIMaskButton"]
 anchors_preset = -1
+anchor_left = -0.261084
 anchor_right = -0.261084
 offset_left = 831.0
 offset_top = -662.0
