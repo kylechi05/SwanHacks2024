@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 				var loc = 7
 				if not self.get_meta("object_reference").getHospitalized():
 					loc = Controller.places[self.get_meta("object_reference").getHome()][0]
+				if self.get_meta("object_reference").getDead():
+					loc = 144
 				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, loc)
 				time += delta*Controller.CITIZEN_SPEED
 			else:
@@ -38,6 +40,8 @@ func _physics_process(delta: float) -> void:
 				var loc = 7
 				if not self.get_meta("object_reference").getHospitalized():
 					loc = Controller.places[self.get_meta("object_reference").getWork()][0]
+				if self.get_meta("object_reference").getDead():
+					loc = 144
 				next_step = Controller.find_next_step(self.global_position.x, self.global_position.y, loc)
 				time += delta*Controller.CITIZEN_SPEED
 			else:

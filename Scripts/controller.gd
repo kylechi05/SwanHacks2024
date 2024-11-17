@@ -48,6 +48,7 @@ var collision_data = []
 var astar_ley = {}
 var citizen_astar = AStar2D.new()
 
+var calc_start = false
 var calc_noon = false
 var calc_night = false
 var home_populations = {}
@@ -96,6 +97,9 @@ func next_day():
 	get_money = true
 	Controller.current_day += 1
 	Controller.TIME_OF_DAY = -3
+	Controller.calc_start = false
+	Controller.calc_night = false
+	Controller.calc_noon = false
 	for i in range(citizenSprites.size()):
 		var sprite = citizenSprites[i][0]
 		var script = citizenSprites[i][1]

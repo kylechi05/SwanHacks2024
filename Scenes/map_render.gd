@@ -26,23 +26,17 @@ func _physics_process(delta: float) -> void:
 	elif (temp_color == 1 and !(Controller.isDay())):
 		temp_color = 0.3
 		self.set_modulate(Color(temp_color, temp_color, temp_color))
+	if Controller.TIME_OF_DAY < 0 and not Controller.calc_start:
+		fill_hospital_beds()
+		Controller.calc_start = true
+		
 	
 	if Controller.TIME_OF_DAY > 12 and not Controller.calc_noon:
-		print(Controller.home_populations)
-		print(Controller.work_populations)
-		print("inf", Controller.infected)
-		print("uninf", Controller.uninfected)
-		print(" ")
-		
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
 		Controller.infected = change_infections["infected"]
 		Controller.uninfected = change_infections["uninfected"]
 		
 		Controller.calc_noon = true
-		
-		print("inf", Controller.infected)
-		print("uninf", Controller.uninfected)
-		print(" ")
 
 		
 	if Controller.TIME_OF_DAY > 24 and not Controller.calc_night:
@@ -61,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		
 		print("inf", Controller.infected)
 		print("uninf", Controller.uninfected)
+		print("dead", Controller.dead)
 		print(" ")
 		
 func get_transmission_result(home, work, uninfected, infected, duringDay):
@@ -69,7 +64,7 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 	
 	for inf in infected:
 		var loc
-		
+		print("Curr ", inf.getCurrentSickLength(), " Total ", inf.getTotalSickLength())
 		if inf.getCurrentSickLength() >= inf.getTotalSickLength():
 			var prob_dead = 0.5 # fatality rate
 			if inf.getHospitalized():
@@ -84,6 +79,7 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 				hold_uninf.append(inf)
 				for i in range(Controller.citizenSprites.size()):
 					if Controller.citizenSprites[i][0].name == inf.getName():
+						Controller.citizenSprites[i][0].get_meta("object_reference").setCurrentSickLength(0)
 						if inf.getVaccinated():
 							Controller.citizenSprites[i][0].texture = Controller.vaxTexture
 						else:
@@ -96,7 +92,7 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 		if duringDay:
 			loc = inf.getWork()
 			for citizen in work[loc]:
-				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1 - citizen.getImmunity():
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1 - citizen.getImmunity() and randf() < 0.5:
 					citizen.setInfected(true)
 					hold_uninf.erase(citizen)
 					hold_inf.append(citizen)
@@ -108,7 +104,7 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 		else:
 			loc = inf.getHome()
 			for citizen in home[loc]:
-				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 0.05 * (1 - citizen.getImmunity()):
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 0.05 * (1 - citizen.getImmunity()) and randf() < 0.5:
 					citizen.setInfected(true)
 					hold_uninf.erase(citizen)
 					hold_inf.append(citizen)
@@ -117,20 +113,21 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 						if Controller.citizenSprites[i][0].name == citizen.getName():
 							Controller.citizenSprites[i][0].texture = Controller.sickTexture
 							break
-					
-		
-			
+	fill_hospital_beds()	
+	
+
+	return {
+		"infected": hold_inf,
+		"uninfected": hold_uninf,
+	}
+	
+func fill_hospital_beds():
 	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:
 		var citizen = Controller.hospital_queue.pop_front()
 		if citizen.getDead() or not citizen.getInfected():
 			continue
 		citizen.setHospitalized(true)
 		Controller.beds_used += 1
-
-	return {
-		"infected": hold_inf,
-		"uninfected": hold_uninf,
-	}
 	
 func read_map():
 	var id = 0
