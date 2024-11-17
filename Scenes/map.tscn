@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=16 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
 [ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
 [ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
+[ext_resource type="Script" path="res://Scripts/ui_math.gd" id="9_eurom"]
 [ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
@@ -122,6 +123,7 @@ TOTAL MASKS: 0
 
 TOTAL VAXXES: 3
 "
+script = ExtResource("9_eurom")
 metadata/_edit_use_anchors_ = true
 
 [node name="UIBed" type="TextureRect" parent="Camera2D/UIBack"]
@@ -136,10 +138,10 @@ func_name = "bed"
 [node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBed"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.375222
-anchor_top = 7.97619
-anchor_right = -0.375222
-anchor_bottom = 7.97619
+anchor_left = -0.261921
+anchor_top = 7.95238
+anchor_right = -0.429409
+anchor_bottom = 7.95238
 offset_left = 76.17
 offset_top = -335.0
 offset_right = 271.17

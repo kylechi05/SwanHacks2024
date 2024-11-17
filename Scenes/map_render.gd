@@ -49,6 +49,10 @@ func _physics_process(delta: float) -> void:
 		if Controller.get_money == true:
 			Controller.total_money += 500
 			Controller.get_money = false
+			Controller.available_bed = randi_range(1, 4)
+			Controller.available_vax = randi_range(2, 9)
+			Controller.available_mask = randi_range(10, 50)
+			Controller.available_post = randi_range(10, 50)
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, false)
 		Controller.infected = change_infections["infected"]
 		Controller.uninfected = change_infections["uninfected"]
