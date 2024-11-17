@@ -15,6 +15,7 @@ var sick_length: int
 var isVaccinated: bool
 var isMasked: bool
 var isInfected: bool
+var isHospitalized: bool
 var isEducated: bool
 var isDead: bool
 
@@ -29,6 +30,7 @@ func _init(name: String, immunity: float, sick_length: float, edu_prob: float, h
 	self.isMasked = false
 	self.isInfected = false
 	self.isEducated = randf() < edu_prob
+	self.isHospitalized = false
 	self.isDead = false
 	self.home = home
 	self.work = work
@@ -66,6 +68,18 @@ func getEducated() -> bool:
 
 func setEducated(educated: bool) -> void:
 	self.isEducated = educated
+	
+func getInfected() -> bool:
+	return self.isInfected
+	
+func setInfected(infected: bool) -> void:
+	self.isInfected = infected
+
+func getHospitalized() -> bool:
+	return self.isHospitalized
+
+func setHospitalized(hospitalized) -> void:
+	self.isHospitalized = hospitalized
 	
 func getDead() -> bool:
 	return self.isDead

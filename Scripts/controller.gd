@@ -39,8 +39,12 @@ var collision_data = []
 var astar_ley = {}
 var citizen_astar = AStar2D.new()
 
-var tiles_currently_populated = []
-var tile_content = []
+var calc_noon = false
+var calc_night = false
+var home_populations = {}
+var work_populations = {}
+var infected = []
+var uninfected = []
 
 var citizenSprites = []
 
