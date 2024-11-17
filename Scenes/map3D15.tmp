@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
-[ext_resource type="Texture2D" uid="uid://4ioetqs11ugs" path="res://Sprites/guy.png" id="3_fhwtk"]
-[ext_resource type="Script" path="res://Scripts/test.gd" id="4_knhbg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -13,15 +11,6 @@ texture_region_size = Vector2i(24, 24)
 0:1/0 = 0
 0:2/0 = 0
 0:3/0 = 0
-0:4/0 = 0
-0:6/0 = 0
-0:5/0 = 0
-0:7/0 = 0
-0:8/0 = 0
-0:9/0 = 0
-0:10/0 = 0
-0:11/0 = 0
-0:12/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_bud3e"]
 tile_size = Vector2i(24, 24)
