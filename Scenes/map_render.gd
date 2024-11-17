@@ -19,7 +19,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	
-	Controller.TIME_OF_DAY += delta
+	Controller.TIME_OF_DAY += delta*2
 	if (Controller.isDay() and temp_color == 0.3):
 		temp_color = 1
 		self.set_modulate(Color(temp_color,temp_color,temp_color))
@@ -187,6 +187,16 @@ func read_map():
 					id += 1
 				"h":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 3))
+				"l":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 19))
+				"1":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 18))
+				"2":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 17))
+				"3":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 15))
+				"4":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 16))
 				"w":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 5))
 				"i":
@@ -201,6 +211,11 @@ func read_map():
 					id += 1
 				"W":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 4))
+					var scene = load("res://Saves/gpu_particles_2d.tscn")
+					var scene_instance = scene.instantiate()
+					scene_instance.set_name("scene")
+					add_child(scene_instance)
+					scene_instance.global_position = Vector2i(y*24+12,x*24-12)
 					Controller.places[Vector2i(y,x)] = [id, 3]
 					Controller.citizen_astar.add_point(id,Vector2i(y,x))
 					init_astar(x,y)

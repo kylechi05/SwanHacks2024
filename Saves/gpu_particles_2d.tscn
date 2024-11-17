@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcng811ntsp0f"]
+
+[ext_resource type="Texture2D" uid="uid://cx43k2vces0fn" path="res://Sprites/paper.png" id="1_tibu3"]
+[ext_resource type="Script" path="res://Saves/emit.gd" id="2_1lxbb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ylife"]
+particle_flag_disable_z = true
+angular_velocity_min = -646.95
+angular_velocity_max = 396.52
+orbit_velocity_min = -0.465
+orbit_velocity_max = 1.101
+gravity = Vector3(0, 98, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+position = Vector2(451, 344)
+amount = 14
+process_material = SubResource("ParticleProcessMaterial_ylife")
+texture = ExtResource("1_tibu3")
+collision_base_size = 0.0
+trail_lifetime = 0.01
+script = ExtResource("2_1lxbb")
