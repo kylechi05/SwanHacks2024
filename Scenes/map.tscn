@@ -1,10 +1,27 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=6 format=3 uid="uid://cyofhlwqbf7xl"]
+=======
+[gd_scene load_steps=17 format=3 uid="uid://cyofhlwqbf7xl"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://4ioetqs11ugs" path="res://Sprites/guy.png" id="3_fhwtk"]
 [ext_resource type="Script" path="res://Scripts/test.gd" id="4_knhbg"]
+=======
+[ext_resource type="AudioStream" uid="uid://2uur2p442k10" path="res://Audio/OverWorld1.mp3" id="4_2qjog"]
+[ext_resource type="Texture2D" uid="uid://w55wt4gp0kyo" path="res://Sprites/ui_back.png" id="5_sp2wy"]
+[ext_resource type="Texture2D" uid="uid://b2ac2nkre2m7d" path="res://Sprites/ui_list.png" id="6_vvq63"]
+[ext_resource type="Script" path="res://Scripts/ui_scroll.gd" id="6_wpii2"]
+[ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
+[ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
+[ext_resource type="Script" path="res://Scripts/stat_ui.gd" id="9_0rmmv"]
+[ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
+[ext_resource type="Script" path="res://Scripts/amount_ui.gd" id="9_547lg"]
+[ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
+>>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -38,4 +55,237 @@ tile_set = SubResource("TileSet_bud3e")
 format = 2
 script = ExtResource("2_m6xmo")
 
+<<<<<<< Updated upstream
 [connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]
+=======
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Camera2D"]
+stream = ExtResource("4_2qjog")
+autoplay = true
+parameters/looping = false
+
+[node name="UIBack" type="Sprite2D" parent="Camera2D"]
+z_index = 1000
+texture = ExtResource("5_sp2wy")
+centered = false
+offset = Vector2(0, -720)
+script = ExtResource("6_wpii2")
+
+[node name="UIPrint" type="Sprite2D" parent="Camera2D/UIBack"]
+position = Vector2(0, -40)
+texture = ExtResource("6_vvq63")
+centered = false
+offset = Vector2(40, -660)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/UIBack/UIPrint"]
+offset_left = 50.0
+offset_top = -640.0
+offset_right = 406.0
+offset_bottom = -86.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "-----------------------
+INFECTED TODAY:
+
+
+DIED TODAY:
+
+
+STILL ALIVE:
+
+
+SURVIVAL RATE:
+
+
+DAYS LEFT:
+
+
+-----------------------"
+script = ExtResource("9_0rmmv")
+
+[node name="UIPrint2" type="Sprite2D" parent="Camera2D/UIBack"]
+position = Vector2(397, -40)
+texture = ExtResource("6_vvq63")
+centered = false
+offset = Vector2(40, -660)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIPrint2"]
+offset_left = 53.0
+offset_top = -644.0
+offset_right = 409.0
+offset_bottom = -90.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "AVAILIBLE BEDS: 3
+
+AVAILIBLE POSTERS: 3
+
+AVAILIBLE MASKS: 3
+
+AVAILIBLE VAXXES: 3
+
+TOTAL BEDS: 0
+
+TOTAL POSTERS: 0
+
+TOTAL MASKS: 0
+
+TOTAL VAXXES: 3
+"
+script = ExtResource("9_547lg")
+metadata/_edit_use_anchors_ = true
+
+[node name="UIBed" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 840.0
+offset_top = -688.0
+offset_right = 1043.0
+offset_bottom = -646.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "bed"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.261921
+anchor_top = 7.92857
+anchor_right = -0.360443
+anchor_bottom = 7.92857
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "BED $1500"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIPoster" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 844.0
+offset_top = -624.0
+offset_right = 1047.0
+offset_bottom = -582.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "post"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIPoster"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.345665
+anchor_top = 7.95238
+anchor_right = -0.345665
+anchor_bottom = 7.95238
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "POSTER $100"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIMask" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 838.0
+offset_top = -560.0
+offset_right = 1041.0
+offset_bottom = -518.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "mask"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIMask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "MASK $20"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIVax" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 839.0
+offset_top = -488.0
+offset_right = 1042.0
+offset_bottom = -446.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "vax"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIVax"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "VAX $250"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIContinue" type="TextureRect" parent="Camera2D/UIBack"]
+offset_left = 836.0
+offset_top = -164.0
+offset_right = 1039.0
+offset_bottom = -122.0
+texture = ExtResource("8_rvkss")
+script = ExtResource("9_8m4da")
+func_name = "next_day"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIContinue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.256995
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.02381
+offset_left = 76.17
+offset_top = -335.0
+offset_right = 271.17
+offset_bottom = -296.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "CONTINUE"
+metadata/_edit_use_anchors_ = true
+
+[node name="Money Stats" type="RichTextLabel" parent="Camera2D/UIBack"]
+offset_left = 848.0
+offset_top = -443.0
+offset_right = 1015.0
+offset_bottom = -172.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+theme_override_styles/background = SubResource("StyleBoxEmpty_qmlw7")
+text = "BUDGET:
+ $750
++$500
+-----------
+ $1250
+-$200
+-----------
+ $1050"
+script = ExtResource("11_gi6aj")
+
+[connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]
+>>>>>>> Stashed changes

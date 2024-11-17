@@ -16,8 +16,85 @@ func _ready() -> void:
 	read_map()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+<<<<<<< Updated upstream
 func _process(delta: float) -> void:
 	pass
+=======
+func _physics_process(delta: float) -> void:
+	
+	Controller.TIME_OF_DAY += delta
+	if (Controller.isDay() and temp_color == 0.3):
+		temp_color = 1
+		self.set_modulate(Color(temp_color,temp_color,temp_color))
+	elif (temp_color == 1 and !(Controller.isDay())):
+		temp_color = 0.3
+		self.set_modulate(Color(temp_color, temp_color, temp_color))
+	
+	if Controller.TIME_OF_DAY > 12 and not Controller.calc_noon:
+		print(Controller.home_populations)
+		print(Controller.work_populations)
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+		
+		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, true)
+		Controller.infected = change_infections["infected"]
+		Controller.uninfected = change_infections["uninfected"]
+		
+		Controller.calc_noon = true
+		
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+
+		
+	if Controller.TIME_OF_DAY > 24 and not Controller.calc_night:
+		if Controller.get_money == true:
+			Controller.total_money += 500
+			Controller.bed_available = randi_range(1, 4)
+			Controller.mask_available = randi_range(20, 30)
+			Controller.vax_available = randi_range(4, 10)
+			Controller.post_available = randi_range(10, 15)
+			Controller.get_money = false
+		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, false)
+		Controller.infected = change_infections["infected"]
+		Controller.uninfected = change_infections["uninfected"]
+		
+		Controller.calc_night = true
+		
+		print("inf", Controller.infected)
+		print("uninf", Controller.uninfected)
+		print(" ")
+		
+func get_transmission_result(home, work, uninfected, infected, duringDay):
+	var hold_inf = infected
+	var hold_uninf = uninfected
+	
+	for inf in infected:
+		var loc
+		
+		if duringDay:
+			loc = inf.getWork()
+			for citizen in work[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
+					citizen.setInfected(true)
+					citizen.setHospitalized(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+		else:
+			loc = inf.getHome()
+			for citizen in home[loc]:
+				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
+					citizen.setInfected(true)
+					citizen.setHospitalized(true)
+					hold_uninf.erase(citizen)
+					hold_inf.append(citizen)
+
+	return {
+		"infected": hold_inf,
+		"uninfected": hold_uninf,
+	}
+>>>>>>> Stashed changes
 	
 func read_map():
 	var id = 0
