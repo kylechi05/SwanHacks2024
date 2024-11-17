@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cyofhlwqbf7xl"]
+[gd_scene load_steps=17 format=3 uid="uid://cyofhlwqbf7xl"]
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
@@ -10,7 +10,9 @@
 [ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
 [ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
 [ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
+[ext_resource type="Script" path="res://Scripts/ui_math.gd" id="9_eurom"]
 [ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
+[ext_resource type="Texture2D" uid="uid://n3586n4m4yoa" path="res://Sprites/rows.png" id="13_teip1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -28,6 +30,8 @@ texture_region_size = Vector2i(24, 24)
 0:10/0 = 0
 0:11/0 = 0
 0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_bud3e"]
 tile_size = Vector2i(24, 24)
@@ -122,6 +126,7 @@ TOTAL MASKS: 0
 
 TOTAL VAXXES: 3
 "
+script = ExtResource("9_eurom")
 metadata/_edit_use_anchors_ = true
 
 [node name="UIBed" type="TextureRect" parent="Camera2D/UIBack"]
@@ -136,10 +141,10 @@ func_name = "bed"
 [node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBed"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.375222
-anchor_top = 7.97619
-anchor_right = -0.375222
-anchor_bottom = 7.97619
+anchor_left = -0.0796552
+anchor_top = 8.04762
+anchor_right = -0.247143
+anchor_bottom = 8.04762
 offset_left = 76.17
 offset_top = -335.0
 offset_right = 271.17
@@ -272,5 +277,32 @@ text = "BUDGET:
 -----------
  $1050"
 script = ExtResource("11_gi6aj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/UIBack"]
+position = Vector2(806, 469)
+texture = ExtResource("13_teip1")
+centered = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/Sprite2D"]
+anchors_preset = -1
+anchor_left = -0.338296
+anchor_top = 8.02381
+anchor_right = -0.256995
+anchor_bottom = 8.81649
+offset_left = 117.221
+offset_top = -1963.86
+offset_right = 312.221
+offset_bottom = -1924.86
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_pwnpt")
+theme_override_font_sizes/normal_font_size = 48
+text = "= HEALTHY
+= VACCINATED
+= SICK
+= GRAVEYARD
+= HOME
+= jOB
+= HOSPITAL"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]

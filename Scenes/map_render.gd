@@ -49,6 +49,10 @@ func _physics_process(delta: float) -> void:
 		if Controller.get_money == true:
 			Controller.total_money += 500
 			Controller.get_money = false
+			Controller.available_bed = randi_range(1, 4)
+			Controller.available_vax = randi_range(2, 9)
+			Controller.available_mask = randi_range(10, 50)
+			Controller.available_post = randi_range(10, 50)
 		var change_infections = get_transmission_result(Controller.home_populations, Controller.work_populations, Controller.uninfected, Controller.infected, false)
 		Controller.infected = change_infections["infected"]
 		Controller.uninfected = change_infections["uninfected"]
@@ -137,14 +141,38 @@ func read_map():
 				#2 = house
 				#3 = workplace
 				"0":
-					var temp_int = randi() % 3
+					var temp_int = randi() % 15
 					match temp_int:
 						0:
 							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
 						1:
 							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 8))
 						2:
-							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 9))
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						3:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						4:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						5:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 13))
+						6:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 13))
+						7:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
+						8:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
+						9:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 0))
+						10:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						11:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						12:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						13:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 10))
+						14:
+							set_cell(0, Vector2i(y,x), 0, Vector2i(0, 11))
 				"r":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 1))
 					Controller.places[Vector2i(y,x)] = [id, 1]
@@ -163,6 +191,14 @@ func read_map():
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 5))
 				"i":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 7))
+				"d":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 14))
+				"D":
+					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 14))
+					Controller.places[Vector2i(y,x)] = [id, 5]
+					Controller.citizen_astar.add_point(id,Vector2i(y,x))
+					init_astar(x,y)
+					id += 1
 				"W":
 					set_cell(0, Vector2i(y,x), 0, Vector2i(0, 4))
 					Controller.places[Vector2i(y,x)] = [id, 3]
