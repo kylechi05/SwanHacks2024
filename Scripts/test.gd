@@ -8,8 +8,7 @@ var step_toggle = false
 func _ready() -> void:
 	start_time -= (randi() % 60 + 1)/30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func  _physic_process(delta: float) -> void:
-		
+func _physics_process(delta: float) -> void:
 	if Controller.TIME_OF_NIGHT < Controller.TIME_OF_DAY:
 		if step_toggle == false:
 			time = 0
