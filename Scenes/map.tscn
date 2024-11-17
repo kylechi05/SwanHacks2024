@@ -1,27 +1,18 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=6 format=3 uid="uid://cyofhlwqbf7xl"]
-=======
 [gd_scene load_steps=17 format=3 uid="uid://cyofhlwqbf7xl"]
->>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Scripts/player_creation.gd" id="1_1hx2l"]
 [ext_resource type="Texture2D" uid="uid://cmkwe2eomyrdu" path="res://Sprites/tileset.png" id="1_62wt0"]
 [ext_resource type="Script" path="res://Scenes/map_render.gd" id="2_m6xmo"]
-<<<<<<< Updated upstream
-[ext_resource type="Texture2D" uid="uid://4ioetqs11ugs" path="res://Sprites/guy.png" id="3_fhwtk"]
-[ext_resource type="Script" path="res://Scripts/test.gd" id="4_knhbg"]
-=======
-[ext_resource type="AudioStream" uid="uid://2uur2p442k10" path="res://Audio/OverWorld1.mp3" id="4_2qjog"]
-[ext_resource type="Texture2D" uid="uid://w55wt4gp0kyo" path="res://Sprites/ui_back.png" id="5_sp2wy"]
-[ext_resource type="Texture2D" uid="uid://b2ac2nkre2m7d" path="res://Sprites/ui_list.png" id="6_vvq63"]
+[ext_resource type="AudioStream" uid="uid://brtjybohwidlb" path="res://Audio/OverWorld1.mp3" id="4_2qjog"]
+[ext_resource type="Texture2D" path="res://Sprites/ui_back.png" id="5_sp2wy"]
+[ext_resource type="Texture2D" path="res://Sprites/ui_list.png" id="6_vvq63"]
 [ext_resource type="Script" path="res://Scripts/ui_scroll.gd" id="6_wpii2"]
-[ext_resource type="FontFile" uid="uid://dtecevlknkftp" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
-[ext_resource type="Texture2D" uid="uid://jieu5fht2jrt" path="res://Sprites/ui_table.png" id="8_rvkss"]
+[ext_resource type="FontFile" path="res://Fonts/wired_words.ttf" id="7_pwnpt"]
+[ext_resource type="Texture2D" path="res://Sprites/ui_table.png" id="8_rvkss"]
 [ext_resource type="Script" path="res://Scripts/stat_ui.gd" id="9_0rmmv"]
 [ext_resource type="Script" path="res://Scripts/button_cont.gd" id="9_8m4da"]
 [ext_resource type="Script" path="res://Scripts/amount_ui.gd" id="9_547lg"]
 [ext_resource type="Script" path="res://Scenes/money_stats.gd" id="11_gi6aj"]
->>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln2vo"]
 texture = ExtResource("1_62wt0")
@@ -44,20 +35,19 @@ texture_region_size = Vector2i(24, 24)
 tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_ln2vo")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qmlw7"]
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_1hx2l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(640, 360)
+offset = Vector2(528, 360)
 
 [node name="TileMap" type="TileMap" parent="Camera2D"]
 tile_set = SubResource("TileSet_bud3e")
 format = 2
 script = ExtResource("2_m6xmo")
 
-<<<<<<< Updated upstream
-[connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]
-=======
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Camera2D"]
@@ -288,4 +278,3 @@ text = "BUDGET:
 script = ExtResource("11_gi6aj")
 
 [connection signal="finished_render" from="Camera2D/TileMap" to="." method="_on_tile_map_finished_render"]
->>>>>>> Stashed changes

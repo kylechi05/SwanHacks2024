@@ -1,10 +1,41 @@
 extends Node
 
-var num_people = 40
+var num_people = 80
 var edu_prob = 0.3
 var imm_prob_window = {"min": 0.05, "max": 0.70}
 var MAP_SIZE = Vector2(44,30)
-var CITIZEN_SPEED = 1.0;
+var CITIZEN_SPEED = 90;
+
+var TOTAL_DAYS = 7
+var current_day = 0
+
+var reset_schedule = false
+
+var TIME_OF_DAY = 0.0
+var TIME_OF_MORN = 6.0
+var TIME_OF_NIGHT = 18.0
+var LENGTH_OF_DAY = 24
+var MONEY_PER_DAY = 500
+var VAX_COST = 250
+var BED_COST = 1500
+var POST_COST = 250
+var MASK_COST = 20
+
+var get_money = true
+var total_money = 0
+
+var brightness = 0
+
+var beds_bought = 0
+var vaccines_bought = 0
+var posters_bought = 0
+var masks_bought = 0
+
+var beds_total = 0
+var beds_used = 0
+var vaccines_total = 0
+var posters_total = 0
+var masks_total = 0
 
 var places = {}
 var tile_array_0 = []
@@ -12,10 +43,6 @@ var collision_data = []
 var astar_ley = {}
 var citizen_astar = AStar2D.new()
 
-<<<<<<< Updated upstream
-var tiles_currently_populated = []
-var tile_content = []
-=======
 var calc_noon = false
 var calc_night = false
 var home_populations = {}
@@ -29,24 +56,16 @@ var post_available = 0
 var vax_available = 0
 
 var citizenSprites = []
->>>>>>> Stashed changes
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
 func find_next_step(x, y, destination):
 	var temp_vect = Vector2i(x/24, y/24)
 	var next_step = Controller.places[temp_vect][0]
 	var temp_path = citizen_astar.get_point_path(next_step, destination, false)
-	print(temp_path)
 	if len(temp_path) < 2:
 		return(null)
 	return(temp_path[1])
 
 func move_to_next_step(citizen, destination, time):
-<<<<<<< Updated upstream
-	citizen.global_position = (citizen.global_position.lerp(destination*24, time))
-=======
 	citizen.global_position = (citizen.global_position.lerp(destination*24, time))
 
 func isDay():
@@ -101,4 +120,3 @@ func title():
 
 func item_overlap(item_position, item_size, mouse_position):
 	return item_position.x < mouse_position.x and mouse_position.x < (item_position.x + item_size.x) and item_position.y < mouse_position.y and mouse_position.y < (item_position.y + item_size.y)
->>>>>>> Stashed changes
