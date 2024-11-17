@@ -136,7 +136,7 @@ func_name = "bed"
 [node name="RichTextLabel2" type="RichTextLabel" parent="Camera2D/UIBack/UIBed"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.2767
+anchor_left = -0.375222
 anchor_top = 7.97619
 anchor_right = -0.375222
 anchor_bottom = 7.97619

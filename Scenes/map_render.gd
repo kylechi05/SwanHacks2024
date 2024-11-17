@@ -71,17 +71,40 @@ func get_transmission_result(home, work, uninfected, infected, duringDay):
 			for citizen in work[loc]:
 				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
 					citizen.setInfected(true)
-					citizen.setHospitalized(true)
 					hold_uninf.erase(citizen)
 					hold_inf.append(citizen)
+					Controller.hospital_queue.append(citizen)
 		else:
 			loc = inf.getHome()
 			for citizen in home[loc]:
 				if citizen.getName() != inf.getName() and not citizen.getInfected() and randf() < 1- citizen.getImmunity():
 					citizen.setInfected(true)
-					citizen.setHospitalized(true)
 					hold_uninf.erase(citizen)
 					hold_inf.append(citizen)
+					Controller.hospital_queue.append(citizen)
+					
+		if inf.getCurrentSickLength() >= inf.getTotalSickLength():
+			var prob_dead = 0.5 # fatality rate
+			if inf.getHospitalized():
+				prob_dead *= (1 - 0.8) # 0.8 is survival increase for being in hospital
+				Controller.beds_used -= 1
+				
+			if randf() < prob_dead:
+				inf.setDead(true)
+				Controller.dead.append(inf.getName())
+			else:
+				inf.setInfected(false)
+				hold_uninf.append(inf)
+			hold_inf.erase(inf)
+		else:
+			inf.setCurrentSickLength(inf.getCurrentSickLength() + 0.5)
+			
+	while Controller.beds_used < Controller.beds_total and Controller.hospital_queue:
+		var citizen = Controller.hospital_queue.pop_front()
+		if citizen.getDead() or not citizen.getInfected():
+			continue
+		citizen.setHospitalized(true)
+		Controller.beds_used += 1
 
 	return {
 		"infected": hold_inf,

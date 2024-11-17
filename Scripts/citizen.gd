@@ -10,7 +10,8 @@ var location: Vector2i
 # max_start = .7
 # min_start = .05
 var immunity: float
-var sick_length: int
+var total_sick_length: int
+var current_sick_length: int
 
 var isVaccinated: bool
 var isMasked: bool
@@ -22,10 +23,10 @@ var isDead: bool
 var work: Vector2i
 var home: Vector2i
 
-func _init(name: String, immunity: float, sick_length: float, edu_prob: float, home: Vector2i, work: Vector2i):
+func _init(name: String, immunity: float, total_sick_length: float, edu_prob: float, home: Vector2i, work: Vector2i):
 	self.citizen_name = name
 	self.immunity = immunity
-	self.sick_length = sick_length
+	self.total_sick_length = total_sick_length
 	self.isVaccinated = false
 	self.isMasked = false
 	self.isInfected = false
@@ -48,8 +49,14 @@ func setLocation(location: Vector2i) -> void:
 func getImmunity() -> float:
 	return self.immunity
 	
-func getSickLength() -> int:
-	return self.sick_length
+func getTotalSickLength() -> int:
+	return self.total_sick_length
+	
+func getCurrentSickLength() -> float:
+	return self.current_sick_length
+
+func setCurrentSickLength(length: float) -> void:
+	self.current_sick_length = length
 
 func getVaccinated() -> bool:
 	return self.isVaccinated

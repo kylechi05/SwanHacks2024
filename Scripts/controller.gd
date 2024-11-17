@@ -49,6 +49,8 @@ var home_populations = {}
 var work_populations = {}
 var infected = []
 var uninfected = []
+var dead = []
+var hospital_queue = []
 
 var citizenSprites = []
 
@@ -67,7 +69,6 @@ func isDay():
 	return Controller.TIME_OF_DAY > Controller.TIME_OF_MORN and Controller.TIME_OF_DAY < Controller.TIME_OF_NIGHT
 
 func next_day():
-	print("called")
 	Controller.beds_total += beds_bought
 	Controller.masks_total += masks_bought
 	Controller.posters_total += posters_bought
